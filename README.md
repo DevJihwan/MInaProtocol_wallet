@@ -61,6 +61,9 @@
       * mkdir ~/.mina-config
       * vi .mina-env
       * 
+      * key 발급 : docker run  --platform linux/amd64 --interactive --tty --rm --volume $(pwd)/keys:/keys minaprotocol/mina-generate-keypair --privkey-path /keys/my-wallet
+
+
 
 😱 [trouble shooting]
 ====================
