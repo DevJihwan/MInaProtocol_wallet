@@ -37,6 +37,7 @@
   * https://docs.aurowallet.com/general/ (Auro Wallet Docs)
   * https://github.com/MinaProtocol/mina/blob/develop/frontend/client_sdk/src/MinaSDK.d.ts (Mina SDK github)
   * https://www.coinbase.com/cloud/discover/protocol-guides/guide-to-mina (Mina protocol)
+  * https://docs.minaprotocol.com/node-operators/connecting-to-devnet (Connecting to Devner with Docker Image)
 
 🔨[Setting Mina Devnet node]
 ============================
@@ -47,7 +48,19 @@
   
     * 1️⃣ 도커 이미지를 통한 방법 (맥 m1 은 arm64이기 때문에 platform 지정)
       * 이미지 Pull : docker pull --platform linux/amd64 minaprotocol/mina-daemon:1.3.2alpha1-ccaa43c-stretch-devnet
-      * 이미지 run : docker run --platform linux/amd64 --name mina-demo -e RUN_DEMO=true minaprotocol/mina-daemon:1.3.2alpha1-ccaa43c-stretch-devnet 
+      * 이미지 run : docker run --platform linux/amd64 --name mina-demo -d \ -p 8302:8302 \ --restart=always \ --mount "type=bind,source=$(pwd)/.mina-env,dst=/entrypoint.d/mina-env,readonly" \ --mount "type=bind,source=$(pwd)/.mina-config,dst=/root/.mina-config" \ minaprotocol/mina-daemon:1.3.2alpha1-ccaa43c-stretch-devnet \ daemon \
+      
+    * 📍 Docker 관련 명령어 
+      * docker container ls (컨테이너 리스트)
+      * docker images (이미지 리스트)
+      * docker exec -it mina-demo  mina client status (클라이언트 상태 점검)
+      * docker logs -f mina-demo (로그 확인)
+
+    * 2️⃣ 설정순서
+      * cd ~ 
+      * mkdir ~/.mina-config
+      * vi .mina-env
+      * 
 
 😱 [trouble shooting]
 ====================
